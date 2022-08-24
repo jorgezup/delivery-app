@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Custumer from './Pages/Customer';
 import Login from './Pages/Login';
-// import './App.css';
-// import rockGlass from './images/rockGlass.svg';
+import Seller from './Pages/Seller';
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route path="/login" component={ Login } />
           <Route path="/customer/products" component={ Custumer } />
+          <Route path="/seller/orders" component={ Seller } />
         </Switch>
       </BrowserRouter>
     </div>
