@@ -24,7 +24,7 @@ const authentication = async ({ email, password }) => {
   };
   const token = generateJWTToken(JSON.stringify(payload));
   
-  return { token };
+  return { token, role: user.role, name: user.name };
 };
 
 module.exports = { authentication };

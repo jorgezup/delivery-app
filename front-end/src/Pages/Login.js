@@ -53,17 +53,19 @@ function Login() {
       password,
     };
     const userInfos = await userLogin(user);
+    const stringLocal = JSON.stringify(userInfos);
 
     if (!userInfos.token) {
+      setValidemail(true);
       setErrorMessage(userInfos);
     } else if (userInfos.role === 'customer') {
-      localStorage.setItem('userInfos', userInfos);
+      localStorage.setItem('userInfos', stringLocal);
       history.push('/customer/products');
     } else if (userInfos.role === 'seller') {
-      localStorage.setItem('userInfos', userInfos);
+      localStorage.setItem('userInfos', stringLocal);
       history.push('/seller/orders');
     } else if (userInfos.role === 'admin') {
-      localStorage.setItem('userInfos', userInfos);
+      localStorage.setItem('userInfos', stringLocal);
       history.push('/admin/manage');
     }
   };

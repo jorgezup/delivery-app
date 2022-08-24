@@ -1,7 +1,7 @@
 const loginService = require('../services/login.service');
 
 const login = async (req, res) => {
-  const { token, status, message } = await loginService.authentication(
+  const { token, status, message, role, name } = await loginService.authentication(
     req.body,
   );
 
@@ -9,7 +9,7 @@ const login = async (req, res) => {
     return res.status(status).json({ message });
   }
 
-  return res.status(200).json({ token });
+  return res.status(200).json({ token, role, name });
 };
 
 const validate = async (req, res) => {
