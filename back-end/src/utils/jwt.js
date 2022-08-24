@@ -1,8 +1,8 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const readFile = require("../utils/readFs");
+const readFile = require('./readFs');
 
 const SECRET = readFile();
 
@@ -10,7 +10,7 @@ console.log(SECRET);
 
 const jwtConfig = {
   // expiresIn: '1h',
-  algorithm: "HS256",
+  algorithm: 'HS256',
 };
 
 const generateJWTToken = (payload) => jwt.sign(payload, SECRET, jwtConfig);
