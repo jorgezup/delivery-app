@@ -1,4 +1,4 @@
-const joi = require("joi");
+const joi = require('joi');
 
 const schema = joi.object({
   email: joi.string().email().required(),
@@ -9,8 +9,8 @@ const validateLogin = (req, _res, next) => {
   const { error } = schema.validate(req.body);
   if (error) {
     next({
-      status: "badRequest",
-      message: "Some required fields are missing",
+      status: 'badRequest',
+      message: 'Some required fields are missing',
     });
   }
 

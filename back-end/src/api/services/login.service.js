@@ -1,27 +1,19 @@
-const md5 = require("md5");
-const { User } = require("../../database/models");
-const { generateJWTToken } = require("../../utils/jwt");
+const md5 = require('md5');
+const { User } = require('../../database/models');
+const { generateJWTToken } = require('../../utils/jwt');
 
 const authentication = async ({ email, password }) => {
   const user = await User.findOne({
-    attributes: ["id", "name", "email", "password", "role"],
+    attributes: ['id', 'name', 'email', 'password', 'role'],
     where: { email },
   });
 
   if (!user) {
-    return {
-      status: 404,
-      message: "Invalid fields or user not found!",
-    };
+    return { status: 404, message: 'Invalid fields or user not found!' };
   }
 
-  const isValidLogin = () => md5(password) === user.dataValues.password;
-
-  if (!isValidLogin()) {
-    return {
-      status: 404,
-      message: "User not found!",
-    };
+  if (md5(password) !== user.dataValues.password) {
+    return { status: 404, message: 'User not found!' };
   }
 
   const payload = {
@@ -30,9 +22,8 @@ const authentication = async ({ email, password }) => {
     email: user.email,
     role: user.role,
   };
-
   const token = generateJWTToken(JSON.stringify(payload));
-
+  
   return { token };
 };
 
