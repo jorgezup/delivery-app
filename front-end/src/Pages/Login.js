@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import userLogin from '../API_Calls/userLogin';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [disable, setDisable] = useState(true);
   const [redirectPerson, setRedirectPerson] = useState(false);
+  const [redirectTo, setRedirectTo] = useState('');
 
   const textError = (emailTest) => {
     const re = /\S+@\S+\.\S+/; // referência: https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
@@ -47,7 +49,32 @@ function Login() {
   };
 
   const clickRegister = () => {
+    setRedirectTo('/register');
     setRedirectPerson(true);
+  };
+
+  const clickLogin = async () => {
+    const user = {
+      email,
+      password,
+    };
+    const userInfos = await userLogin(user);
+
+    if (!userInfos.token) {
+      setErrorMessage(userInfos);
+    } else if (userInfos.role === 'customer') {
+      localStorage.setItem('userInfos', userInfos);
+      setRedirectTo('/customer/products');
+      setRedirectPerson(true);
+    } else if (userInfos.role === 'seller') {
+      localStorage.setItem('userInfos', userInfos);
+      setRedirectTo('/seller/orders');
+      setRedirectPerson(true);
+    } else if (userInfos.role === 'admin') {
+      localStorage.setItem('userInfos', userInfos);
+      setRedirectTo('/admin/manage');
+      setRedirectPerson(true);
+    }
   };
 
   return (
@@ -79,6 +106,7 @@ function Login() {
             type="button"
             data-testid="common_login__button-login"
             disabled={ disable }
+            onClick={ clickLogin }
           >
             Entrar
           </button>
@@ -91,7 +119,7 @@ function Login() {
           </button>
         </form>
         {validEmail && <p>{errorMessage}</p> }
-        {redirectPerson && <Redirect to="/register" /> }
+        {redirectPerson && <Redirect to={ redirectTo } /> }
       </main>
     </div>
   );
