@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Register() {
   return (
@@ -39,6 +39,7 @@ function Register() {
           >
             Entrar
           </button>
+          {/* {pInfo && <p className='login-pInfo'>{pInfo}</p>} */}
         </form>
       </main>
     </div>
