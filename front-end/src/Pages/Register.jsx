@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
 function Register() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [pInfo, setPInfo] = useState('');
+
   return (
     <div className='register-page'>
       <main className='register-main'>
@@ -11,8 +16,8 @@ function Register() {
             placeholder="Nome"
             className="register-input"
             required
-            // value={ name }
-            // onChange={ (e) => setEmail(e.target.value) }
+            value={ name }
+            onChange={ (e) => setEmail(e.target.value) }
           />
           <input
             id='email'
@@ -20,8 +25,8 @@ function Register() {
             placeholder="Email"
             className="register-input"
             required
-            // value={ email }
-            // onChange={ (e) => setEmail(e.target.value) }
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
           />
           <input
             id='password'
@@ -29,13 +34,13 @@ function Register() {
             placeholder="Senha"
             className="register-input"
             required
-            // value={ password }
-            // onChange={ (e) => setPassword(e.target.value) }
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
           />
           <button
             type="button"
             className='register-button'
-            // onClick={ handleLogin }
+            onClick={ console.log(email, password, name) }
           >
             Entrar
           </button>
