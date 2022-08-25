@@ -1,16 +1,23 @@
-const loginService = require('../services/login.service');
+const adminService = require('../services/admin.service');
 
 const createUser = async (req, res) => {
-  const { token, role, name, email } = await loginService.authentication(
-    req.body,
-  );
-
-  return res.status(200).json({ name, email, role, token });
+  const user = await adminService.createUser(req.body);
+  
+  return res.status(200).json(user);
 };
 
 const getAllUsers = async (req, res) => {
-  const { user } = res.locals;
-  return res.status(200).json({ role: user.role });
+  const users = await adminService.getAllUsers();
+  
+  return res.status(200).json(users);
 };
 
-module.exports = { createUser, getAllUsers };
+const deleteUser = async (req, res) => {
+  const deletedUser = await adminService.deleteUser(req.params.id);
+  
+  if (!deletedUser) return res.status(404).json({ message: 'User not found' });
+
+  return res.status(204).end();
+};
+
+module.exports = { createUser, getAllUsers, deleteUser };
