@@ -1,10 +1,10 @@
-const  {User}  = require('../../database/models');
 const md5 = require('md5');
+const { User } = require('../../database/models');
 
-async function create({name, email, password}) {
-  const user = await User.findOne({where: { name, email }});
+async function create({ name, email, password }) {
+  const user = await User.findOne({ where: { name, email } });
   
-  if(user) return null;
+  if (user) return null;
 
   const hashPassword = md5(password);
   const role = 'cliente';
@@ -13,13 +13,11 @@ async function create({name, email, password}) {
     name,
     email,
     password: hashPassword,
-    role});
+    role });
 
   delete newUser.dataValues.password;
   
   return newUser;
-
 }
 
-
-module.exports = {create};
+module.exports = { create };
