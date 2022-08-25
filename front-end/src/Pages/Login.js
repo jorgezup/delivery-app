@@ -111,7 +111,8 @@ function Login() {
             Ainda não é cadastrado?
           </button>
         </form>
-        {validEmail && <p>{errorMessage}</p> }
+        {validEmail
+        && <p data-testid="common_login__element-invalid-email">{errorMessage}</p> }
       </main>
     </div>
   );
