@@ -6,6 +6,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidemail] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [disable, setDisable] = useState(true);
   const history = useHistory();
@@ -18,20 +19,25 @@ function Login() {
       setDisable(true);
     } else {
       setValidemail(true);
-      setErrorMessage('Email Inválido');
+      setErrorMessage('Dados Inválidos');
       setDisable(true);
     }
   };
 
   const passwordError = (pass) => {
     const passLimit = 6;
+
     if (pass.length < passLimit) {
-      setValidemail(true);
-      setErrorMessage('Senha Inválida');
+      setValidPassword(true);
+      setErrorMessage('Dados Inválidos');
       setDisable(true);
     } else {
-      setValidemail(false);
-      setDisable(false);
+      setValidPassword(false);
+      if (!validEmail) {
+        setDisable(false);
+      } else {
+        setDisable(true);
+      }
     }
   };
 
@@ -44,6 +50,7 @@ function Login() {
     } else {
       setPassword(value);
       passwordError(value);
+      console.log('Email', validEmail, 'Senha', validPassword);
     }
   };
 
@@ -95,6 +102,7 @@ function Login() {
               onChange={ manageInputs }
             />
           </label>
+          {}
           <button
             type="button"
             data-testid="common_login__button-login"
@@ -112,6 +120,8 @@ function Login() {
           </button>
         </form>
         {validEmail
+        && <p data-testid="common_login__element-invalid-email">{errorMessage}</p> }
+        {validPassword
         && <p data-testid="common_login__element-invalid-email">{errorMessage}</p> }
       </main>
     </div>
