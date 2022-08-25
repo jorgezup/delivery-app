@@ -10,6 +10,7 @@ const login = async (req, res) => {
 
 const validate = async (req, res) => {
   const { user } = res.locals;
+
   return res.status(200).json({ role: user.role });
 };
 
