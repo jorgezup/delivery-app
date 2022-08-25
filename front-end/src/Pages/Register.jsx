@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import validate from '../Validations/validateRegister';
+import postRegister from '../API_Calls/register';
 
 function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const emailRegex = /\S+@\S+\.\S+/;
-  // const [pInfo, setPInfo] = useState('');
+  const [pInfo, setPInfo] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
-  function handleButton() {
-    setDisabled(true); setName(''); setEmail(''); setPassword('');
+  async function handleButton() {
+    try {
+      await postRegister(name, email, password);
+      history.push('/customer/products');
+    } catch (error) {
+      setPInfo(error.response.data.message.error);
+    }
   };
 
   useEffect(() => {
     if (name.length >= 12 && password.length >= 6 && emailRegex.test(email) ) {
-      setDisabled(false);
-    } else { setDisabled(true) }
+      setDisabled(false); setPInfo('');
+    } else if (!name || !password || !email ) {
+      setPInfo('');
+    } else { setDisabled(true); setPInfo(validate(name, email, password)); }
   }, [name, email, password]);
 
   return (
@@ -62,11 +72,11 @@ function Register() {
           >
             Cadastrar
           </button>
-          {/* {pInfo && (
+          {pInfo && (
             <p
-              className='login-pInfo'
+              className='register-pInfo'
               data-testid="common_register__element-invalid_register"
-            >{pInfo}</p>}) */}
+            >{pInfo}</p>)}
         </form>
       </main>
     </div>
