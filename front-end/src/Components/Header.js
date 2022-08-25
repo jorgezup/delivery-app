@@ -14,12 +14,28 @@ function Header() {
   return (
     <nav>
       <div>
-        <Link to="/customer/products" />
-        <Link to="/customer/checkout" />
+        <Link
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+        />
+        <Link
+          to="/customer/checkout"
+          data-testid="customer_products__element-navbar-link-orders"
+        />
       </div>
       <div>
-        <p>{customerName}</p>
-        <button type="button" onClick={ () => history.push('/login') }>Sair</button>
+        <p
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
+          {customerName}
+        </p>
+        <button
+          type="button"
+          onClick={ () => history.push('/login') }
+          data-testid="customer_products__element-navbar-link-logout"
+        >
+          Sair
+        </button>
       </div>
 
     </nav>
