@@ -6,8 +6,6 @@ const readFile = require('./readFs');
 
 const SECRET = readFile();
 
-console.log(SECRET);
-
 const jwtConfig = {
   // expiresIn: '1h',
   algorithm: 'HS256',
