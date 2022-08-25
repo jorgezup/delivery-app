@@ -19,22 +19,27 @@ function Register() {
     } catch (error) {
       setPInfo(error.response.data.message.error);
     }
-  };
+  }
 
   useEffect(() => {
-    if (name.length >= 12 && password.length >= 6 && emailRegex.test(email) ) {
+    const minLengthName = 12;
+    const minLengthPassword = 6;
+
+    if (name.length >= minLengthName
+      && password.length >= minLengthPassword && emailRegex.test(email)) {
       setDisabled(false); setPInfo('');
-    } else if (!name || !password || !email ) {
+    } else if (!name || !password || !email) {
       setPInfo('');
     } else { setDisabled(true); setPInfo(validate(name, email, password)); }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, email, password]);
 
   return (
-    <div className='register-page'>
-      <main className='register-main'>
-        <form className='register-form'>
+    <div className="register-page">
+      <main className="register-main">
+        <form className="register-form">
           <input
-            id='name'
+            id="name"
             type="text"
             data-testid="common_register__input-name"
             placeholder="Nome"
@@ -44,7 +49,7 @@ function Register() {
             onChange={ (e) => setName(e.target.value) }
           />
           <input
-            id='email'
+            id="email"
             type="text"
             data-testid="common_register__input-email"
             placeholder="Email"
@@ -54,7 +59,7 @@ function Register() {
             onChange={ (e) => setEmail(e.target.value) }
           />
           <input
-            id='password'
+            id="password"
             type="password"
             data-testid="common_register__input-password"
             placeholder="Senha"
@@ -66,7 +71,7 @@ function Register() {
           <button
             type="button"
             data-testid="common_register__button-register"
-            className='register-button'
+            className="register-button"
             disabled={ disabled }
             onClick={ handleButton }
           >
@@ -74,9 +79,12 @@ function Register() {
           </button>
           {pInfo && (
             <p
-              className='register-pInfo'
+              className="register-pInfo"
               data-testid="common_register__element-invalid_register"
-            >{pInfo}</p>)}
+            >
+              {pInfo}
+
+            </p>)}
         </form>
       </main>
     </div>
