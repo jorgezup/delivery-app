@@ -67,17 +67,17 @@ function Login() {
     } else if (userInfos.role === 'customer') {
       const objLocal = { ...userInfos, email };
       const stringLocal = JSON.stringify(objLocal);
-      localStorage.setItem('userInfos', stringLocal);
+      localStorage.setItem('user', stringLocal);
       history.push('/customer/products');
     } else if (userInfos.role === 'seller') {
       const objLocal = { ...userInfos, email };
       const stringLocal = JSON.stringify(objLocal);
-      localStorage.setItem('userInfos', stringLocal);
+      localStorage.setItem('user', stringLocal);
       history.push('/seller/orders');
     } else if (userInfos.role === 'admin') {
       const objLocal = { ...userInfos, email };
       const stringLocal = JSON.stringify(objLocal);
-      localStorage.setItem('userInfos', stringLocal);
+      localStorage.setItem('user', stringLocal);
       history.push('/admin/manage');
     }
   };

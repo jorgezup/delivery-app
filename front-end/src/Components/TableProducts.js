@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import listProducts from '../API_Calls/listProducts';
 
+// [
+//   { id: 1, qtd: 0 },
+//   { id: 2, qtd: 0 },
+//   { id: 3, qtd: 0 },
+//   { id: 4, qtd: 0 },
+//   { id: 5, qtd: 0 },
+//   { id: 6, qtd: 0 },
+//   { id: 7, qtd: 0 },
+//   { id: 8, qtd: 0 },
+//   { id: 9, qtd: 0 },
+//   { id: 10, qtd: 0 },
+//   { id: 11, qtd: 0 }]
+
 function TableProducts() {
   const [arrProducts, setArrProducts] = useState([]);
   const [qtdItem, setQtdItem] = useState(0);
@@ -9,7 +22,7 @@ function TableProducts() {
   // const history = useHistory();
 
   useEffect(() => {
-    const localData = localStorage.getItem('userInfos');
+    const localData = localStorage.getItem('user');
     const objUser = JSON.parse(localData);
 
     const getProduts = async () => {
@@ -132,7 +145,7 @@ function TableProducts() {
           <p
             data-testid={ `customer_products__element-card-price-${items.id}` }
           >
-            {items.price}
+            {items.price.replace(/\./, ',')}
           </p>
           <button
             type="button"
