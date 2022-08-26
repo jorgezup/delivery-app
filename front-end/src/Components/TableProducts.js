@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import listProducts from '../API_Calls/listProducts';
 
+// [
+//   { id: 1, qtd: 0 },
+//   { id: 2, qtd: 0 },
+//   { id: 3, qtd: 0 },
+//   { id: 4, qtd: 0 },
+//   { id: 5, qtd: 0 },
+//   { id: 6, qtd: 0 },
+//   { id: 7, qtd: 0 },
+//   { id: 8, qtd: 0 },
+//   { id: 9, qtd: 0 },
+//   { id: 10, qtd: 0 },
+//   { id: 11, qtd: 0 }]
+
 function TableProducts() {
   const [arrProducts, setArrProducts] = useState([]);
   const [qtdItem, setQtdItem] = useState(0);
@@ -9,7 +22,7 @@ function TableProducts() {
   // const history = useHistory();
 
   useEffect(() => {
-    const localData = localStorage.getItem('userInfos');
+    const localData = localStorage.getItem('user');
     const objUser = JSON.parse(localData);
 
     const getProduts = async () => {
@@ -21,17 +34,18 @@ function TableProducts() {
 
   const changeInput = ({ target }) => {
     const { value, id } = target;
-    const item = arrProducts.find((product) => id === product.id);
+
+    const item = arrProducts.find((product) => Number(id) === product.id);
     if (value < 0) {
       setQtdItem(0);
     } else {
       setQtdItem(value);
-      const carItem = { ...item, qtd: value };
-      const verifyArr = arrCar.filter((infos) => id === infos.id);
+      const carItem = { ...item, qtd: Number(value) };
+      const verifyArr = arrCar.filter((infos) => Number(id) === infos.id);
       if (verifyArr.length > 0) {
         const newArr = arrCar.map((itemsCar) => {
-          if (itemsCar.id === id) {
-            itemsCar.qtd = value;
+          if (itemsCar.id === Number(id)) {
+            itemsCar.qtd = Number(value);
           }
           const obj = {
             id: itemsCar.id,
@@ -49,18 +63,20 @@ function TableProducts() {
     }
   };
 
-  const addValue = ({ target }) => {
-    const { id } = target;
+  const addValue = (id) => {
+    console.log(id);
 
     setQtdItem(qtdItem + 1);
 
-    const item = arrProducts.find((product) => id === product.id);
+    const item = arrProducts.find((product) => Number(id) === product.id);
+    console.log('item', item);
     const carItem = { ...item, qtd: qtdItem + 1 };
+    console.log(carItem);
 
     const verifyArr = arrCar.filter((infos) => id === infos.id);
     if (verifyArr.length > 0) {
       const newArr = arrCar.map((itemsCar) => {
-        if (itemsCar.id === id) {
+        if (itemsCar.id === Number(id)) {
           itemsCar.qtd = qtdItem + 1;
         }
         const obj = {
@@ -78,21 +94,21 @@ function TableProducts() {
     }
   };
 
-  const rmValue = ({ target }) => {
+  const rmValue = (id) => {
     const newValue = qtdItem - 1;
-    const { id } = target;
 
     if (newValue < 0) {
       setQtdItem(0);
     } else {
       setQtdItem(newValue);
 
+      const item = arrProducts.find((product) => Number(id) === product.id);
       const carItem = { ...item, qtd: newValue };
-      const verifyArr = arrCar.filter((infos) => id === infos.id);
+      const verifyArr = arrCar.filter((infos) => Number(id) === infos.id);
 
       if (verifyArr.length > 0) {
         const newArr = arrCar.map((itemsCar) => {
-          if (itemsCar.id === id) {
+          if (itemsCar.id === Number(id)) {
             itemsCar.qtd = newValue;
           }
           const obj = {
@@ -113,10 +129,11 @@ function TableProducts() {
 
   return (
     <div>
+      {console.log(arrCar)}
       {arrProducts.map((items) => (
         <div key={ items.id }>
           <img
-            src={ items.img }
+            src={ items.urlImage }
             alt="imagem de cerveja"
             data-testid={ `customer_products__img-card-bg-image-${items.id}` }
           />
@@ -128,12 +145,13 @@ function TableProducts() {
           <p
             data-testid={ `customer_products__element-card-price-${items.id}` }
           >
-            {items.preco}
+            {items.price.replace(/\./, ',')}
           </p>
           <button
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${items.id}` }
-            onClick={ rmValue }
+            onClick={ () => rmValue(items.id) }
+            id={ items.id }
           >
             -
           </button>
@@ -143,11 +161,13 @@ function TableProducts() {
             value={ qtdItem }
             data-testid={ `customer_products__input-card-quantity-${items.id}` }
             onChange={ changeInput }
+            id={ items.id }
           />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${items.id}` }
-            onClick={ addValue }
+            onClick={ () => addValue(items.id) }
+            id={ items.id }
           >
             +
           </button>

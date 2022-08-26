@@ -1,8 +1,9 @@
 const { Product } = require('../../database/models');
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async () => {
   const products = await Product.findAll();
+
   return products;
 };
 
-module.exports = getAllProducts;
+module.exports = { getAllProducts };

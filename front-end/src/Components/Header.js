@@ -6,10 +6,15 @@ function Header() {
   const history = useHistory();
 
   useEffect(() => {
-    const localData = localStorage.getItem('userInfos');
+    const localData = localStorage.getItem('user');
     const objUser = JSON.parse(localData);
     setCustomerName(objUser.name);
   }, []);
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
 
   return (
     <nav>
@@ -17,11 +22,15 @@ function Header() {
         <Link
           to="/customer/products"
           data-testid="customer_products__element-navbar-link-products"
-        />
+        >
+          Produtos
+        </Link>
         <Link
           to="/customer/checkout"
           data-testid="customer_products__element-navbar-link-orders"
-        />
+        >
+          Checkout
+        </Link>
       </div>
       <div>
         <p
@@ -31,7 +40,7 @@ function Header() {
         </p>
         <button
           type="button"
-          onClick={ () => history.push('/login') }
+          onClick={ logout }
           data-testid="customer_products__element-navbar-link-logout"
         >
           Sair
