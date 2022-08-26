@@ -74,7 +74,7 @@ function Login() {
       const stringLocal = JSON.stringify(objLocal);
       localStorage.setItem('user', stringLocal);
       history.push('/seller/orders');
-    } else if (userInfos.role === 'admin') {
+    } else if (userInfos.role === 'administrator') {
       const objLocal = { ...userInfos, email };
       const stringLocal = JSON.stringify(objLocal);
       localStorage.setItem('user', stringLocal);

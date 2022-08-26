@@ -1,25 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import listProducts from '../API_Calls/listProducts';
-
-// [
-//   { id: 1, qtd: 0 },
-//   { id: 2, qtd: 0 },
-//   { id: 3, qtd: 0 },
-//   { id: 4, qtd: 0 },
-//   { id: 5, qtd: 0 },
-//   { id: 6, qtd: 0 },
-//   { id: 7, qtd: 0 },
-//   { id: 8, qtd: 0 },
-//   { id: 9, qtd: 0 },
-//   { id: 10, qtd: 0 },
-//   { id: 11, qtd: 0 }]
 
 function TableProducts() {
   const [arrProducts, setArrProducts] = useState([]);
-  const [qtdItem, setQtdItem] = useState(0);
-  const [arrCar, setArrCar] = useState([]);
-  // const history = useHistory();
+  // const [arrCar, setArrCar] = useState([]);
+  const [totalPrice, setTotal] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     const localData = localStorage.getItem('user');
@@ -27,7 +14,11 @@ function TableProducts() {
 
     const getProduts = async () => {
       const list = await listProducts(objUser.token);
-      setArrProducts(list);
+      const list2 = list.map((itemList) => ({
+        ...itemList,
+        qtd: 0,
+      }));
+      setArrProducts(list2);
     };
     getProduts();
   }, []);
@@ -35,101 +26,65 @@ function TableProducts() {
   const changeInput = ({ target }) => {
     const { value, id } = target;
 
-    const item = arrProducts.find((product) => Number(id) === product.id);
-    if (value < 0) {
-      setQtdItem(0);
-    } else {
-      setQtdItem(value);
-      const carItem = { ...item, qtd: Number(value) };
-      const verifyArr = arrCar.filter((infos) => Number(id) === infos.id);
-      if (verifyArr.length > 0) {
-        const newArr = arrCar.map((itemsCar) => {
-          if (itemsCar.id === Number(id)) {
-            itemsCar.qtd = Number(value);
-          }
-          const obj = {
-            id: itemsCar.id,
-            img: itemsCar.img,
-            name: itemsCar.name,
-            preco: itemsCar.preco,
-            qtd: itemsCar.qtd,
-          };
-          return obj;
-        });
-        setArrCar(newArr);
-      } else {
-        setArrCar([...arrCar, carItem]);
+    const item2 = arrProducts.map((product) => {
+      if (Number(id) === product.id && Number(value) > 0) {
+        return {
+          ...product,
+          qtd: Number(value),
+        };
       }
-    }
+      return product;
+    });
+    setArrProducts(item2);
+
+    const allPrice = item2.reduce((acc, item) => {
+      acc += (item.price * item.qtd);
+      return acc;
+    }, 0);
+    setTotal(allPrice.toFixed(2));
   };
 
   const addValue = (id) => {
-    console.log(id);
-
-    setQtdItem(qtdItem + 1);
-
-    const item = arrProducts.find((product) => Number(id) === product.id);
-    console.log('item', item);
-    const carItem = { ...item, qtd: qtdItem + 1 };
-    console.log(carItem);
-
-    const verifyArr = arrCar.filter((infos) => id === infos.id);
-    if (verifyArr.length > 0) {
-      const newArr = arrCar.map((itemsCar) => {
-        if (itemsCar.id === Number(id)) {
-          itemsCar.qtd = qtdItem + 1;
-        }
-        const obj = {
-          id: itemsCar.id,
-          img: itemsCar.img,
-          name: itemsCar.name,
-          preco: itemsCar.preco,
-          qtd: itemsCar.qtd,
+    // const item = arrProducts.find((product) => Number(id) === product.id);
+    const item2 = arrProducts.map((product) => {
+      if (Number(id) === product.id) {
+        return {
+          ...product,
+          qtd: product.qtd + 1,
         };
-        return obj;
-      });
-      setArrCar(newArr);
-    } else {
-      setArrCar([...arrCar, carItem]);
-    }
+      }
+      return product;
+    });
+    setArrProducts(item2);
+
+    const allPrice = item2.reduce((acc, item) => {
+      acc += (item.price * item.qtd);
+      return acc;
+    }, 0);
+    setTotal(allPrice.toFixed(2));
   };
 
   const rmValue = (id) => {
-    const newValue = qtdItem - 1;
-
-    if (newValue < 0) {
-      setQtdItem(0);
-    } else {
-      setQtdItem(newValue);
-
-      const item = arrProducts.find((product) => Number(id) === product.id);
-      const carItem = { ...item, qtd: newValue };
-      const verifyArr = arrCar.filter((infos) => Number(id) === infos.id);
-
-      if (verifyArr.length > 0) {
-        const newArr = arrCar.map((itemsCar) => {
-          if (itemsCar.id === Number(id)) {
-            itemsCar.qtd = newValue;
-          }
-          const obj = {
-            id: itemsCar.id,
-            img: itemsCar.img,
-            name: itemsCar.name,
-            preco: itemsCar.preco,
-            qtd: itemsCar.qtd,
-          };
-          return obj;
-        });
-        setArrCar(newArr);
-      } else {
-        setArrCar([...arrCar, carItem]);
+    const item2 = arrProducts.map((product) => {
+      if (Number(id) === product.id && product.qtd > 0) {
+        return {
+          ...product,
+          qtd: product.qtd - 1,
+        };
       }
-    }
+      return product;
+    });
+    setArrProducts(item2);
+
+    const allPrice = item2.reduce((acc, item) => {
+      acc += (item.price * item.qtd);
+      return acc;
+    }, 0);
+    setTotal(allPrice.toFixed(2));
   };
 
   return (
     <div>
-      {console.log(arrCar)}
       {arrProducts.map((items) => (
         <div key={ items.id }>
           <img
@@ -158,7 +113,7 @@ function TableProducts() {
           <input
             type="number"
             min="0"
-            value={ qtdItem }
+            value={ items.qtd }
             data-testid={ `customer_products__input-card-quantity-${items.id}` }
             onChange={ changeInput }
             id={ items.id }
@@ -173,6 +128,16 @@ function TableProducts() {
           </button>
         </div>
       ))}
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        onClick={ () => history.push('/customer/checkout') }
+        disabled={ totalPrice === 0 || totalPrice === '0.00' }
+      >
+        <p data-testid="customer_products__checkout-bottom-value">
+          {`Valor total: R$${totalPrice.toString().replace(/\./, ',')}`}
+        </p>
+      </button>
     </div>
   );
 }
