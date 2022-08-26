@@ -7,7 +7,7 @@ async function create({ name, email, password }) {
   if (user) return null;
 
   const hashPassword = md5(password);
-  const role = 'cliente';
+  const role = 'customer';
 
   const newUser = await User.create({
     name,
