@@ -17,7 +17,7 @@ function Register() {
       await postRegister(name, email, password);
       history.push('/customer/products');
     } catch (error) {
-      setPInfo(error.response.data.message.error);
+      setPInfo(error.response.data.message);
     }
   }
 
