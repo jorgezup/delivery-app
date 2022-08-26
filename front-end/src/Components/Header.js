@@ -17,11 +17,15 @@ function Header() {
         <Link
           to="/customer/products"
           data-testid="customer_products__element-navbar-link-products"
-        />
+        >
+          Produtos
+        </Link>
         <Link
           to="/customer/checkout"
           data-testid="customer_products__element-navbar-link-orders"
-        />
+        >
+          Checkout
+        </Link>
       </div>
       <div>
         <p

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const listProducts = async (token) => {
+  console.log('token', token);
   const url = 'http://localhost:3001/products';
 
   const result = await axios.get(url, {
