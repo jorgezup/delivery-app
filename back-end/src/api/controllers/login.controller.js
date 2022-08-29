@@ -1,11 +1,11 @@
 const loginService = require('../services/login.service');
 
 const login = async (req, res) => {
-  const { token, role, name, email } = await loginService.authentication(
+  const { token, role, name, email, id } = await loginService.authentication(
     req.body,
   );
 
-  return res.status(200).json({ name, email, role, token });
+  return res.status(200).json({ id, name, email, role, token });
 };
 
 const validate = async (req, res) => {
