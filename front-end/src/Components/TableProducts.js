@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { func } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import listProducts from '../API_Calls/listProducts';
 
-function TableProducts() {
+function TableProducts(props) {
   const [arrProducts, setArrProducts] = useState([]);
-  // const [arrCar, setArrCar] = useState([]);
   const [totalPrice, setTotal] = useState(0);
   const history = useHistory();
 
   useEffect(() => {
+    const { funcExibit } = props;
+    funcExibit(true);
     const localData = localStorage.getItem('user');
     const objUser = JSON.parse(localData);
 
@@ -21,7 +23,7 @@ function TableProducts() {
       setArrProducts(list2);
     };
     getProduts();
-  }, []);
+  }, [props]);
 
   const changeInput = ({ target }) => {
     const { value, id } = target;
@@ -83,6 +85,15 @@ function TableProducts() {
     setTotal(allPrice.toFixed(2));
   };
 
+  const clickCart = () => {
+    const { funcCarrinho, funcExibit } = props;
+    const carrinho = arrProducts.filter((product) => product.qtd > 0);
+    funcCarrinho(carrinho);
+    funcExibit(false);
+    history.push('/customer/checkout');
+    // localStorage.setItem('carrinho', carrinho);
+  };
+
   return (
     <div>
       {arrProducts.map((items) => (
@@ -131,7 +142,7 @@ function TableProducts() {
       <button
         type="button"
         data-testid="customer_products__button-cart"
-        onClick={ () => history.push('/customer/checkout') }
+        onClick={ clickCart }
         disabled={ totalPrice === 0 || totalPrice === '0.00' }
       >
         <p data-testid="customer_products__checkout-bottom-value">
@@ -141,5 +152,10 @@ function TableProducts() {
     </div>
   );
 }
+
+TableProducts.propTypes = {
+  funcCarrinho: func.isRequired,
+  funcExibit: func.isRequired,
+};
 
 export default TableProducts;
