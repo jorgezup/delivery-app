@@ -21,6 +21,18 @@ module.exports = {
           password: "1c37466c159755ce1fa181bd247cb925",
           role: "customer",
         },
+        {
+          name: "João da Silva",
+          email: "joao@email.com",
+          password: "1c37466c159755ce1fa181bd247cb925",
+          role: "customer",
+        },
+        {
+          name: "Maria da Silva",
+          email: "maria@deliveryapp.com",
+          password: "3c28d2b0881bf46457a853e0b07531c6",
+          role: "seller",
+        },
       ],
       { timestamps: false }
     );
