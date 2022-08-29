@@ -14,4 +14,10 @@ module.exports = {
 
     return res.status(StatusCodes.CREATED).json(user);
   },
-};
+  
+  getAllSeller: async (req, res) => {   
+    const users = await UserService.getAllSeller();
+
+    return res.status(StatusCodes.OK).json(users);
+  },
+};  
