@@ -9,7 +9,7 @@ function Custumer() {
 
   return (
     <div>
-      <Header />
+      <Header setExibitProducts={ setExibitProducts } />
       {exibitProducts
         ? <TableProducts funcExibit={ setExibitProducts } funcCarrinho={ setArrCar } />
         : <Checkout carrinho={ arrCar } />}

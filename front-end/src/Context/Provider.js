@@ -1,24 +1,25 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 
-export const MyDeliveryContext = createContext();
+export const MyContext = createContext();
 
-export default function ProviderDelivery({ children }) {
-  const [userId, setUserId] = useState(0);
+function ProviderDelivery({ children }) {
+  // const [userId, setUserId] = useState(0);
 
-  const contextValue = {
-    userId,
-    setUserId,
-  };
+  // const contextValue = {
+  //   userId,
+  //   setUserId,
+  // };
 
   return (
-    <MyDeliveryContext.Provider value={ contextValue }>
+    <MyContext.Provider>
       { children }
-    </MyDeliveryContext.Provider>
+    </MyContext.Provider>
   );
 }
 
 ProviderDelivery.propTypes = {
   children: PropTypes.arrayOf(PropTypes.elementType).isRequired,
 };
+
+export default ProviderDelivery;

@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import getSellers from '../API_Calls/getAllSellers';
-import { MyDeliveryContext } from '../Context/Provider';
-import apiPostSale from '../API_Calls/apiPostSale';
+// import { MyContext } from '../Context/Provider';
+// import apiPostSale from '../API_Calls/apiPostSale';
 
 function Checkout(props) {
   const [arrCarrinho, setArrCarrinho] = useState([]);
@@ -12,9 +12,9 @@ function Checkout(props) {
   const [numberAdress, setNumberAdress] = useState('');
   const [selectValue, setSelectValue] = useState('Fulana Pereira');
   const [arrayOfSellers, setArrayOfSellers] = useState([]);
-  const { userId } = useContext(MyDeliveryContext);
-  const [token2, setToken2] = useState('');
-  const history = useHistory();
+  // const userId = useContext(MyContext);
+  // const [token2, setToken2] = useState('');
+  // const history = useHistory();
 
   useEffect(() => {
     const { carrinho } = props;
@@ -29,7 +29,7 @@ function Checkout(props) {
 
     const userStorage = JSON.parse(localStorage.getItem('user'));
     const { token } = userStorage;
-    setToken2(token);
+    // setToken2(token);
 
     const searchAPI = async () => {
       const sellers = await getSellers(token);
@@ -62,8 +62,9 @@ function Checkout(props) {
 
   const clickPostSale = async () => {
     const objSeller = arrayOfSellers.find((seller) => seller.name === selectValue);
+    const idStorage = JSON.parse(localStorage.getItem('userId'));
     const objSaleInfos = {
-      userId,
+      userId: idStorage,
       sellerId: objSeller.id,
       totalPrice,
       deliveryAddress: adress,
@@ -84,9 +85,13 @@ function Checkout(props) {
       products: arrToSend,
     };
 
-    const idSale = await apiPostSale(token2, objFinalSale);
+    console.log('objSaleInfos', objSaleInfos);
 
-    history.push(`/customer/orders/${idSale.id}`);
+    console.log(objFinalSale);
+
+    // const idSale = await apiPostSale(token2, objFinalSale);
+
+    // history.push(`/customer/orders/${idSale.id}`);
   };
 
   return (
@@ -106,11 +111,41 @@ function Checkout(props) {
         <tbody>
           {arrCarrinho.map((item, index) => (
             <tr key={ item.id }>
-              <td>{index + 1}</td>
-              <td>{item.name}</td>
-              <td>{item.qtd}</td>
-              <td>{item.price.replace(/\./, ',')}</td>
-              <td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-item-number-${item.id}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-name-${item.id}`
+                }
+              >
+                {item.name}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-quantity-${item.id}`
+                }
+              >
+                {item.qtd}
+
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-unit-price-${item.id}`
+                }
+              >
+                {item.price.replace(/\./, ',')}
+
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-sub-total-${item.id}`
+                }
+              >
                 {
                   (+item.qtd * +item.price)
                     .toFixed(2).toString().replace(/\./, ',')
@@ -121,6 +156,9 @@ function Checkout(props) {
                 <button
                   type="button"
                   onClick={ () => clickRemoveItem(item.id) }
+                  data-testid={
+                    `customer_checkout__element-order-table-remove-${item.id}`
+                  }
                 >
                   Remover item
                 </button>
@@ -129,10 +167,18 @@ function Checkout(props) {
           ))}
         </tbody>
       </table>
-      <p>{`Valor total: R$${totalPrice.toFixed(2).toString().replace(/\./, ',')}`}</p>
+      <p
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        {`Valor total: R$${totalPrice.toFixed(2).toString().replace(/\./, ',')}`}
+      </p>
       <h3>Detalhes e Endereço para Entrega</h3>
       <form>
-        <select value={ selectValue } onChange={ handleSelect }>
+        <select
+          value={ selectValue }
+          onChange={ handleSelect }
+          data-testid="customer_checkout__select-seller"
+        >
           {arrayOfSellers.map((seller) => (
             <option key={ seller.id }>{seller.name}</option>
           ))}
@@ -145,20 +191,29 @@ function Checkout(props) {
             id="endereco"
             onChange={ handleInputAddress }
             value={ adress }
+            data-testid="customer_checkout__input-address"
           />
         </label>
         <label htmlFor="numero">
-          Número da entrega:
+          Número:
           <input
             type="text"
             placeholder="Endereço"
             id="numero"
             onChange={ handleInputNumber }
             value={ numberAdress }
+            data-testid="customer_checkout__input-addressNumber"
           />
         </label>
       </form>
-      <button type="button" onClick={ clickPostSale }>Finalizar Pedido</button>
+      <button
+        type="button"
+        onClick={ clickPostSale }
+        data-testid="customer_checkout__button-submit-order"
+      >
+        Finalizar Pedido
+
+      </button>
     </div>
   );
 }

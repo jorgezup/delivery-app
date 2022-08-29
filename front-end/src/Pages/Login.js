@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import userLogin from '../API_Calls/userLogin';
-import { MyDeliveryContext } from '../Context/Provider';
+// import { MyContext } from '../Context/Provider';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ function Login() {
   const [validPassword, setValidPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [disable, setDisable] = useState(true);
-  const { setUserId } = useContext(MyDeliveryContext);
+  // const setUserId = useContext(MyContext);
   const history = useHistory();
 
   const textError = (emailTest) => {
@@ -74,8 +74,10 @@ function Login() {
         email,
       };
       const stringLocal = JSON.stringify(objLocal);
-      setUserId(userInfos.id);
+      const stringLocalId = JSON.stringify(userInfos.id);
+      // setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
+      localStorage.setItem('userId', stringLocalId);
       history.push('/customer/products');
     } else if (userInfos.role === 'seller') {
       const objLocal = {
@@ -85,8 +87,10 @@ function Login() {
         email,
       };
       const stringLocal = JSON.stringify(objLocal);
-      setUserId(userInfos.id);
+      const stringLocalId = JSON.stringify(userInfos.id);
+      // setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
+      localStorage.setItem('userId', stringLocalId);
       history.push('/seller/orders');
     } else if (userInfos.role === 'administrator') {
       const objLocal = {
@@ -96,8 +100,10 @@ function Login() {
         email,
       };
       const stringLocal = JSON.stringify(objLocal);
-      setUserId(userInfos.id);
+      const stringLocalId = JSON.stringify(userInfos.id);
+      // setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
+      localStorage.setItem('userId', stringLocalId);
       history.push('/admin/manage');
     }
   };
