@@ -20,4 +20,6 @@ async function create({ name, email, password }) {
   return newUser;
 }
 
-module.exports = { create };
+const getAllSeller = async () => User.findAll({ where: { role: 'seller' } });
+
+module.exports = { create, getAllSeller };
