@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import userLogin from '../API_Calls/userLogin';
+import { MyDeliveryContext } from '../Context/Provider';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ function Login() {
   const [validPassword, setValidPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [disable, setDisable] = useState(true);
+  const { setUserId } = useContext(MyDeliveryContext);
   const history = useHistory();
 
   const textError = (emailTest) => {
@@ -65,18 +67,36 @@ function Login() {
       setValidemail(true);
       setErrorMessage(userInfos);
     } else if (userInfos.role === 'customer') {
-      const objLocal = { ...userInfos, email };
+      const objLocal = {
+        name: userInfos.name,
+        role: userInfos.role,
+        token: userInfos.token,
+        email,
+      };
       const stringLocal = JSON.stringify(objLocal);
+      setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
       history.push('/customer/products');
     } else if (userInfos.role === 'seller') {
-      const objLocal = { ...userInfos, email };
+      const objLocal = {
+        name: userInfos.name,
+        role: userInfos.role,
+        token: userInfos.token,
+        email,
+      };
       const stringLocal = JSON.stringify(objLocal);
+      setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
       history.push('/seller/orders');
     } else if (userInfos.role === 'administrator') {
-      const objLocal = { ...userInfos, email };
+      const objLocal = {
+        name: userInfos.name,
+        role: userInfos.role,
+        token: userInfos.token,
+        email,
+      };
       const stringLocal = JSON.stringify(objLocal);
+      setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
       history.push('/admin/manage');
     }
