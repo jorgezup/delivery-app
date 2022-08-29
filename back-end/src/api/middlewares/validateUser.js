@@ -12,7 +12,7 @@ const validateUser = (req, _res, next) => {
   if (error) {
     next({
       status: 'badRequest',
-      message: 'Some required fields are missing',
+      message: error.message,
     });
   }
 
