@@ -8,7 +8,7 @@ const routes = express.Router();
 routes.post('/', [
   authentication,
   validateOrder,
-  orderController.createOrder
+  orderController.createOrder,
 ]);
 
 routes.get('/clients/:id', 

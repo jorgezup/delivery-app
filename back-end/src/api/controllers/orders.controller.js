@@ -9,7 +9,7 @@ const getAllOrdersByClient = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  const result = await orderService.createOrder(req.body);
+  await orderService.createOrder(req.body);
 
   res.status(StatusCodes.CREATED).end();
 };
