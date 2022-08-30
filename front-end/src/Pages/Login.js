@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import userLogin from '../API_Calls/userLogin';
+// import { MyContext } from '../Context/Provider';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ function Login() {
   const [validPassword, setValidPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [disable, setDisable] = useState(true);
+  // const setUserId = useContext(MyContext);
   const history = useHistory();
 
   const textError = (emailTest) => {
@@ -65,19 +67,43 @@ function Login() {
       setValidemail(true);
       setErrorMessage(userInfos);
     } else if (userInfos.role === 'customer') {
-      const objLocal = { ...userInfos, email };
+      const objLocal = {
+        name: userInfos.name,
+        role: userInfos.role,
+        token: userInfos.token,
+        email,
+      };
       const stringLocal = JSON.stringify(objLocal);
+      const stringLocalId = JSON.stringify(userInfos.id);
+      // setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
+      localStorage.setItem('userId', stringLocalId);
       history.push('/customer/products');
     } else if (userInfos.role === 'seller') {
-      const objLocal = { ...userInfos, email };
+      const objLocal = {
+        name: userInfos.name,
+        role: userInfos.role,
+        token: userInfos.token,
+        email,
+      };
       const stringLocal = JSON.stringify(objLocal);
+      const stringLocalId = JSON.stringify(userInfos.id);
+      // setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
+      localStorage.setItem('userId', stringLocalId);
       history.push('/seller/orders');
     } else if (userInfos.role === 'administrator') {
-      const objLocal = { ...userInfos, email };
+      const objLocal = {
+        name: userInfos.name,
+        role: userInfos.role,
+        token: userInfos.token,
+        email,
+      };
       const stringLocal = JSON.stringify(objLocal);
+      const stringLocalId = JSON.stringify(userInfos.id);
+      // setUserId(userInfos.id);
       localStorage.setItem('user', stringLocal);
+      localStorage.setItem('userId', stringLocalId);
       history.push('/admin/manage');
     }
   };
