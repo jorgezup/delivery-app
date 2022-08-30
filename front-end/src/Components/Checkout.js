@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import getSellers from '../API_Calls/getAllSellers';
 // import { MyContext } from '../Context/Provider';
-// import apiPostSale from '../API_Calls/apiPostSale';
+import apiPostSale from '../API_Calls/apiPostSale';
 
 function Checkout(props) {
   const [arrCarrinho, setArrCarrinho] = useState([]);
@@ -13,8 +13,8 @@ function Checkout(props) {
   const [selectValue, setSelectValue] = useState('Fulana Pereira');
   const [arrayOfSellers, setArrayOfSellers] = useState([]);
   // const userId = useContext(MyContext);
-  // const [token2, setToken2] = useState('');
-  // const history = useHistory();
+  const [token2, setToken2] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     const { carrinho } = props;
@@ -29,7 +29,7 @@ function Checkout(props) {
 
     const userStorage = JSON.parse(localStorage.getItem('user'));
     const { token } = userStorage;
-    // setToken2(token);
+    setToken2(token);
 
     const searchAPI = async () => {
       const sellers = await getSellers(token);
@@ -74,7 +74,7 @@ function Checkout(props) {
 
     const arrToSend = arrCarrinho.map((item) => {
       const obj = {
-        product_id: item.id,
+        productId: item.id,
         quantity: item.qtd,
       };
       return obj;
@@ -89,9 +89,10 @@ function Checkout(props) {
 
     console.log(objFinalSale);
 
-    // const idSale = await apiPostSale(token2, objFinalSale);
+    const idSale = await apiPostSale(token2, objFinalSale);
+    console.log('IDSALE:', idSale);
 
-    // history.push(`/customer/orders/${idSale.id}`);
+    history.push(`/customer/orders/${idSale.id}`);
   };
 
   return (
