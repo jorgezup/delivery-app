@@ -113,21 +113,21 @@ function Checkout(props) {
             <tr key={ item.id }>
               <td
                 data-testid={
-                  `customer_checkout__element-order-table-item-number-${item.id}`
+                  `customer_checkout__element-order-table-item-number-${index}`
                 }
               >
                 {index + 1}
               </td>
               <td
                 data-testid={
-                  `customer_checkout__element-order-table-name-${item.id}`
+                  `customer_checkout__element-order-table-name-${index}`
                 }
               >
                 {item.name}
               </td>
               <td
                 data-testid={
-                  `customer_checkout__element-order-table-quantity-${item.id}`
+                  `customer_checkout__element-order-table-quantity-${index}`
                 }
               >
                 {item.qtd}
@@ -135,7 +135,7 @@ function Checkout(props) {
               </td>
               <td
                 data-testid={
-                  `customer_checkout__element-order-table-unit-price-${item.id}`
+                  `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
                 {item.price.replace(/\./, ',')}
@@ -143,7 +143,7 @@ function Checkout(props) {
               </td>
               <td
                 data-testid={
-                  `customer_checkout__element-order-table-sub-total-${item.id}`
+                  `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
                 {
@@ -157,7 +157,7 @@ function Checkout(props) {
                   type="button"
                   onClick={ () => clickRemoveItem(item.id) }
                   data-testid={
-                    `customer_checkout__element-order-table-remove-${item.id}`
+                    `customer_checkout__element-order-table-remove-${index}`
                   }
                 >
                   Remover item
