@@ -9,9 +9,9 @@ const getAllOrdersByClient = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  await orderService.createOrder(req.body);
+  const { id } = await orderService.createOrder(req.body);
 
-  res.status(StatusCodes.CREATED).end();
+  res.status(StatusCodes.CREATED).json({ id });
 };
 
 module.exports = {
