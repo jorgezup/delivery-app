@@ -23,6 +23,7 @@ const validateOrder = (req, _res, next) => {
       message: error.message,
     });
   }
+  next();
 };
 
 module.exports = validateOrder;
