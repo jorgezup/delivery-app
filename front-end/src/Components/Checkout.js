@@ -10,7 +10,7 @@ function Checkout(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [adress, setAdress] = useState('');
   const [numberAdress, setNumberAdress] = useState('');
-  const [selectValue, setSelectValue] = useState('Fulana Pereira');
+  const [selectValue, setSelectValue] = useState('2');
   const [arrayOfSellers, setArrayOfSellers] = useState([]);
   // const userId = useContext(MyContext);
   const [token2, setToken2] = useState('');
@@ -33,7 +33,7 @@ function Checkout(props) {
 
     const searchAPI = async () => {
       const sellers = await getSellers(token);
-      console.log(sellers);
+
       setArrayOfSellers(sellers);
     };
     searchAPI();
@@ -58,10 +58,13 @@ function Checkout(props) {
   };
   const handleInputAddress = ({ target }) => setAdress(target.value);
   const handleInputNumber = ({ target }) => setNumberAdress(target.value);
-  const handleSelect = ({ target }) => setSelectValue(target.value);
+  const handleSelect = ({ target }) => {
+    setSelectValue(target.value);
+  };
 
   const clickPostSale = async () => {
-    const objSeller = arrayOfSellers.find((seller) => seller.name === selectValue);
+    const objSeller = arrayOfSellers.find((seller) => seller.id === +selectValue);
+
     const idStorage = JSON.parse(localStorage.getItem('userId'));
     const objSaleInfos = {
       userId: idStorage,
@@ -85,12 +88,7 @@ function Checkout(props) {
       products: arrToSend,
     };
 
-    console.log('objSaleInfos', objSaleInfos);
-
-    console.log(objFinalSale);
-
     const idSale = await apiPostSale(token2, objFinalSale);
-    console.log('IDSALE:', idSale);
 
     history.push(`/customer/orders/${idSale.id}`);
   };
@@ -176,12 +174,18 @@ function Checkout(props) {
       <h3>Detalhes e Endereço para Entrega</h3>
       <form>
         <select
-          value={ selectValue }
           onChange={ handleSelect }
           data-testid="customer_checkout__select-seller"
+          defaultValue={ selectValue }
         >
           {arrayOfSellers.map((seller) => (
-            <option key={ seller.id }>{seller.name}</option>
+            <option
+              data-testid="customer_checkout__select-seller"
+              key={ seller.id }
+              value={ seller.id }
+            >
+              {seller.name}
+            </option>
           ))}
         </select>
         <label htmlFor="endereco">
