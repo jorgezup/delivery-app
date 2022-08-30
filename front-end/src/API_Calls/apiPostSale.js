@@ -3,7 +3,7 @@ import axios from 'axios';
 const apiPostSale = async (token, objSale) => {
   const url = 'http://localhost:3001/orders';
 
-  const result = await axios.get(url, objSale, {
+  const result = await axios.post(url, objSale, {
     headers: {
       Authorization: token,
     },
