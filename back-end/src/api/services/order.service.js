@@ -25,6 +25,7 @@ const createOrder = async ({ sale, products }) => {
     }));
     await saleProduct.bulkCreate(productsArray);
     await transaction.commit();
+    return insertSale;
   } catch (er) {
     await transaction.rollback();
     console.log(er);
