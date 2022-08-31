@@ -14,10 +14,6 @@ function OrdersGeneric() {
 
   const history = useHistory();
 
-  const NavigateToOrderDetails = (id) => {
-    history.push(`/seller/orders/${id}`);
-  };
-
   useEffect(() => {
     const getOrders = async () => {
       try {
@@ -44,7 +40,8 @@ function OrdersGeneric() {
             <button
               type="button"
               key={ order.id }
-              onClick={ () => NavigateToOrderDetails(order.id) }
+              onClick={ () => history.push(`/seller/orders/${order.id}`) }
+              data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
             >
               <div
                 className="card"
