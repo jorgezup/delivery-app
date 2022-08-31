@@ -21,7 +21,7 @@ function TableOrders() {
       {orders.length > 0 ? (
         orders.map((order) => {
           const date = moment(order.saleDate, 'YYYY-MM-DD');
-          const formatedDate = date.format('l');
+          const formatedDate = date.format('DD/MM/YYYY');
           const dataTestId = 'customer_orders__element-';
           return (
             <Link key={ order.id } to={ `/customer/orders/${order.id}` }>
