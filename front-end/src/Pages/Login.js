@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import userLogin from '../API_Calls/userLogin';
 // import { MyContext } from '../Context/Provider';
@@ -12,6 +12,23 @@ function Login() {
   const [disable, setDisable] = useState(true);
   // const setUserId = useContext(MyContext);
   const history = useHistory();
+
+  useEffect(() => {
+    const userLocalStorage = localStorage.getItem('user');
+    if (userLocalStorage) {
+      const { token, role } = JSON.parse(userLocalStorage);
+
+      if (token) {
+        if (role === 'customer') {
+          history.push('/customer/products');
+        } else if (role === 'seller') {
+          history.push('/seller/orders');
+        } else if (role === 'administrator') {
+          history.push('/admin/manage');
+        }
+      }
+    }
+  });
 
   const textError = (emailTest) => {
     const re = /\S+@\S+\.\S+/; // referência: https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
