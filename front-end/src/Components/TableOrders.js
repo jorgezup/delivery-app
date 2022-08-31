@@ -8,7 +8,12 @@ function TableOrders() {
 
   useEffect(() => {
     const objUser = JSON.parse(localStorage.getItem('user'));
-    setOrders(customerOrders(objUser.token, objUser.id));
+    const userId = JSON.parse(localStorage.getItem('userId'));
+    const getCustomerOrders = async () => {
+      const data = await customerOrders(objUser.token, userId);
+      setOrders(data);
+    };
+    getCustomerOrders();
   }, []);
 
   return (
@@ -19,7 +24,7 @@ function TableOrders() {
           const formatedDate = date.format('l');
           const dataTestId = 'customer_orders__element-';
           return (
-            <Link key={ order.id } to={ `customer/orders/${order.id}` }>
+            <Link key={ order.id } to={ `/customer/orders/${order.id}` }>
               <div>
                 <p data-testid={ `${dataTestId}order-id-${order.id}` }>
                   {`Pedido ${order.id}`}
