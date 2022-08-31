@@ -7,4 +7,19 @@ const getAllOrders = async (req, res) => {
   return res.status(200).json(orders);
 };
 
-module.exports = { getAllOrders };
+const getSaleById = async (req, res) => {
+  const { id } = req.params;
+  const sale = await sellersService.getSaleById(id);
+
+  return res.status(200).json(sale);
+};
+
+const changeStatus = async (req, res) => {
+  const { id, status } = req.body;
+  const { id: userId } = res.locals.user;
+  const updatedSale = await sellersService.changeStatus(id, status, userId);
+
+  return res.status(200).json(updatedSale);
+};
+
+module.exports = { getAllOrders, getSaleById, changeStatus };

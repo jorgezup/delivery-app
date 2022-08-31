@@ -11,7 +11,7 @@ module.exports = {
           delivery_address: 'Rua São Paulo',
           delivery_number: '123',
           sale_date: '2022-08-28 09:00:00',
-          status: 'pendente',
+          status: 'Pendente',
         },
         {
           id: 2,
@@ -21,7 +21,7 @@ module.exports = {
           delivery_address: 'Rua Serra',
           delivery_number: '456',
           sale_date: '2022-08-27 18:00:00',
-          status: 'preparando',
+          status: 'Preparando',
         },
         {
           id: 3,
@@ -31,7 +31,7 @@ module.exports = {
           delivery_address: 'Rua Maranhão',
           delivery_number: '321',
           sale_date: '2022-07-17 12:00:00',
-          status: 'entregue',
+          status: 'Entregue',
         },
 
       ],

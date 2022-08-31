@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../API_Calls/api';
+import { formatDate, formatPrice } from '../utils/formatters';
 
 function OrdersGeneric() {
   const [orders, setOrders] = useState([]);
   const [pInfo, setPInfo] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const userStorage = JSON.parse(localStorage.getItem('user'));
-  const { token } = userStorage;
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
+  const dataTestId = 'seller_orders__';
+
+  const history = useHistory();
 
   useEffect(() => {
     const getOrders = async () => {
@@ -33,15 +37,19 @@ function OrdersGeneric() {
       <div className="container">
         {
           orders.map((order) => (
-            <Link key={ order.id } to={ `/seller/orders/${order.id}` }>
+            <button
+              type="button"
+              key={ order.id }
+              onClick={ () => history.push(`/seller/orders/${order.id}`) }
+              data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
+            >
               <div
                 className="card"
-                style={ { border: '1px solid black', marginBottom: '20px' } }
               >
                 <div className="grid">
                   <div className="orderNumber">
                     <p
-                      data-testid={ `seller_orders__element-order-id-${order.id}` }
+                      data-testid={ `${dataTestId}element-order-id-${order.id}` }
                     >
                       {`Pedido ${order.id}`}
                     </p>
@@ -50,28 +58,28 @@ function OrdersGeneric() {
                     <div
                       className="status"
                       data-testid={ `
-                      seller_orders__element-delivery-status-${order.status}
+                      ${dataTestId}element-delivery-status-${order.id}
                     ` }
                     >
                       {order.status}
                     </div>
                     <p
                       data-testid={ `
-                        seller_orders__element-order-date-${order.saleDate}` }
+                        ${dataTestId}element-order-date-${order.id}` }
                     >
-                      {order.saleDate}
+                      {formatDate(order.saleDate)}
                     </p>
                     <p
                       data-testid={ `
-                        seller_orders__element-card-price-${order.totalPrice}
+                        ${dataTestId}element-card-price-${order.id}
                       ` }
                     >
-                      {order.totalPrice}
+                      {formatPrice(order.totalPrice)}
                     </p>
                     <div
                       className="address"
                       data-testid={ `
-                      seller_orders__element-card-address-${order.deliveryAddress}
+                      ${dataTestId}element-card-address-${order.id}
                     ` }
                     >
                       {`${order.deliveryAddress}, ${order.deliveryNumber}`}
@@ -79,7 +87,7 @@ function OrdersGeneric() {
                   </div>
                 </div>
               </div>
-            </Link>
+            </button>
           ))
         }
       </div>
