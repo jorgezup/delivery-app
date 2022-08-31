@@ -15,15 +15,15 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Redirect exact from="/" to="/login" />
-          <Route path="/login" component={ Login } />
+          <Route exact path="/login" component={ Login } />
           <Route path="/customer/products" component={ Custumer } />
           <Route path="/seller/orders" exact component={ Seller } />
           <Route path="/seller/orders/:id" component={ OrderSellerDetails } />
           <Route path="/admin/manage" component={ Admin } />
           <Route path="/register" component={ Register } />
-          <Route path="/customer/orders" component={ Orders } />
           <Route path="/customer/checkout" component={ Custumer } />
           <Route path="/customer/orders/:id" component={ OrderCustumerDetails } />
+          <Route exact path="/customer/orders" component={ Orders } />
         </Switch>
       </BrowserRouter>
     </div>

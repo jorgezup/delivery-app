@@ -9,8 +9,6 @@ function TableProducts(props) {
   const history = useHistory();
 
   useEffect(() => {
-    const { funcExibit } = props;
-    funcExibit(true);
     const localData = localStorage.getItem('user');
     const objUser = JSON.parse(localData);
 
@@ -86,10 +84,9 @@ function TableProducts(props) {
   };
 
   const clickCart = () => {
-    const { funcCarrinho, funcExibit } = props;
+    const { funcCarrinho } = props;
     const carrinho = arrProducts.filter((product) => product.qtd > 0);
     funcCarrinho(carrinho);
-    funcExibit(false);
     history.push('/customer/checkout');
     // localStorage.setItem('carrinho', carrinho);
   };
@@ -155,7 +152,6 @@ function TableProducts(props) {
 
 TableProducts.propTypes = {
   funcCarrinho: func.isRequired,
-  funcExibit: func.isRequired,
 };
 
 export default TableProducts;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { func } from 'prop-types';
 
-function Header(props) {
+function Header() {
   const [customerName, setCustomerName] = useState('');
   const history = useHistory();
 
@@ -17,36 +16,22 @@ function Header(props) {
     history.push('/login');
   };
 
-  const clickLinkProducts = () => {
-    const { setExibitProducts } = props;
-    setExibitProducts(true);
-  };
-
-  const clickLinkCheckout = () => {
-    const { setExibitProducts } = props;
-    setExibitProducts(false);
-  };
-
   return (
     <nav>
       <div>
-        <button type="button" onClick={ clickLinkProducts }>
-          <Link
-            to="/customer/products"
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            Produtos
-          </Link>
-        </button>
+        <Link
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+        >
+          Produtos
+        </Link>
 
-        <button type="button" onClick={ clickLinkCheckout }>
-          <Link
-            to="/customer/checkout"
-            data-testid="customer_products__element-navbar-link-orders"
-          >
-            Checkout
-          </Link>
-        </button>
+        <Link
+          to="/customer/orders"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
+          Orders
+        </Link>
 
       </div>
       <div>
@@ -67,9 +52,5 @@ function Header(props) {
     </nav>
   );
 }
-
-Header.propTypes = {
-  setExibitProducts: func.isRequired,
-};
 
 export default Header;
