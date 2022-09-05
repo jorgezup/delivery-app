@@ -30,18 +30,6 @@ const createOrder = async ({ sale, products }) => {
     await transaction.rollback();
     console.log(er);
   }
-  
-  // Promise.all(products.map(async ({productId, quantity}) => {
-  //   console.log(productId, quantity);
-  //   console.log('createOrder')
-  //   const insert = {
-  //     saleId: insertSale.id,
-  //     productId,
-  //     quantity,
-  //   }
-    // return await saleProduct.create(insert);
-    // }
-  // ))
 };
 
 module.exports = {
