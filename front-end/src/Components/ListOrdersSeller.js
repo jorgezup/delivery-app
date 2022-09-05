@@ -41,7 +41,7 @@ function OrdersGeneric() {
               type="button"
               key={ order.id }
               onClick={ () => history.push(`/seller/orders/${order.id}`) }
-              data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
+              // data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
             >
               <div
                 className="card"
@@ -57,9 +57,7 @@ function OrdersGeneric() {
                   <div className="orderDetails">
                     <div
                       className="status"
-                      data-testid={ `
-                      ${dataTestId}element-delivery-status-${order.id}
-                    ` }
+                      data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
                     >
                       {order.status}
                     </div>

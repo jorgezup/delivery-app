@@ -3,12 +3,14 @@ import { Link, useHistory } from 'react-router-dom';
 
 function Header() {
   const [customerName, setCustomerName] = useState('');
+  const [role, setRole] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     const localData = localStorage.getItem('user');
     const objUser = JSON.parse(localData);
     setCustomerName(objUser.name);
+    setRole(objUser.role);
   }, []);
 
   const logout = () => {
@@ -26,13 +28,22 @@ function Header() {
           Produtos
         </Link>
 
-        <Link
-          to="/customer/orders"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Orders
-        </Link>
-
+        {role === 'customer'
+          ? (
+            <Link
+              to="/customer/orders"
+              data-testid="customer_products__element-navbar-link-orders"
+            >
+              Orders
+            </Link>)
+          : (
+            <Link
+              to="/seller/orders"
+              data-testid="customer_products__element-navbar-link-orders"
+            >
+              Orders
+            </Link>
+          )}
       </div>
       <div>
         <p
