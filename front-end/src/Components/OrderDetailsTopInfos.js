@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formatDate } from '../utils/formatters';
 
-function OrderDetailsTopInfos({ order }) {
+function OrderDetailsTopInfos({ order, handleChangeStatusToDelivered, buttonDisabled }) {
   const dataTestId = 'customer_order_details__';
 
   return (
@@ -26,7 +26,8 @@ function OrderDetailsTopInfos({ order }) {
       <button
         type="button"
         data-testid={ `${dataTestId}button-delivery-check` }
-        disabled
+        onClick={ handleChangeStatusToDelivered }
+        disabled={ buttonDisabled }
       >
         MARCAR COMO ENTREGUE
       </button>
@@ -41,6 +42,8 @@ OrderDetailsTopInfos.propTypes = {
     date: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
+  handleChangeStatusToDelivered: PropTypes.func.isRequired,
+  buttonDisabled: PropTypes.bool.isRequired,
 };
 
 export default OrderDetailsTopInfos;
