@@ -4,7 +4,7 @@ const getAllOrders = async (id) => Sale.findAll({
     where: { sellerId: id },
   });
 
-const getSaleById = async (id) => Sale.findByPk(id, { include: ['products'] });
+const getSaleById = async (id) => Sale.findByPk(id, { include: ['products', 'sales'] });
 
 const changeStatus = async (id, status, userId) => Sale.update({ status }, { 
   where: { id, sellerId: userId } });
