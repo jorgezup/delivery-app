@@ -12,18 +12,17 @@ function OrderDetailsTopInfos({ order }) {
       </p>
       <p data-testid={ `${dataTestId}element-order-details-label-seller-name` }>
         Pessoa Vendedora:
+        {' '}
         {order.seller}
       </p>
       <p data-testid={ `${dataTestId}element-order-details-label-order-date` }>
         {formatDate(order.date)}
       </p>
-      <p
-        data-testid="
-          customer_order_details__element-order-details-label-delivery-status
-          "
+      <div
+        data-testid={ `${dataTestId}element-order-details-label-delivery-status` }
       >
         {order.status}
-      </p>
+      </div>
       <button
         type="button"
         data-testid={ `${dataTestId}button-delivery-check` }
