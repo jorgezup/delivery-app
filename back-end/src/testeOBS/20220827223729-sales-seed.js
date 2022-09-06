@@ -43,4 +43,3 @@
 //     await queryInterface.bulkDelete("sales", null, {});
 //   },
 // };
-

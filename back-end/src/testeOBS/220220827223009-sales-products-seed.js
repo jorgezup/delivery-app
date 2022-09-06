@@ -42,4 +42,3 @@
 //     await queryInterface.bulkDelete("sales_products", null, {});
 //   },
 // };
-
