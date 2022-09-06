@@ -14,7 +14,7 @@ function TableOrders() {
       setOrders(data);
     };
     getCustomerOrders();
-  }, []);
+  }, [orders]);
 
   return (
     <div>

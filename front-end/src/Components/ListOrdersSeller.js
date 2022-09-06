@@ -28,7 +28,7 @@ function OrdersGeneric() {
       }
     };
     getOrders();
-  }, [token]);
+  }, [token, orders]);
   return (
     <>
       <h3>Orders</h3>
@@ -41,7 +41,7 @@ function OrdersGeneric() {
               type="button"
               key={ order.id }
               onClick={ () => history.push(`/seller/orders/${order.id}`) }
-              data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
+              // data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
             >
               <div
                 className="card"
@@ -55,14 +55,13 @@ function OrdersGeneric() {
                     </p>
                   </div>
                   <div className="orderDetails">
-                    <div
+                    {console.log(order.id)}
+                    <p
                       className="status"
-                      data-testid={ `
-                      ${dataTestId}element-delivery-status-${order.id}
-                    ` }
+                      data-testid={ `${dataTestId}element-delivery-status-${order.id}` }
                     >
                       {order.status}
-                    </div>
+                    </p>
                     <p
                       data-testid={ `
                         ${dataTestId}element-order-date-${order.id}` }
