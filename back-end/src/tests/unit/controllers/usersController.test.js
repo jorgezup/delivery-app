@@ -13,7 +13,7 @@ const mockResponse = () => {
   return response
 }
 
-const users = require('../../mocks/usersMock');
+const {users} = require('../../mocks/usersMock');
 
 const sellers = users.filter((user) => user.role === 'seller');
 

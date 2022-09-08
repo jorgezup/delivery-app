@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 
-const users = require('../../mocks/usersMock')
+const {users} = require('../../mocks/usersMock')
 
 const usersService = require('../../../api/services/user.register.service');
 
