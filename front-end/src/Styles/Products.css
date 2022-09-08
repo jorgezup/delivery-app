@@ -1,0 +1,28 @@
+.products-all {
+  background-color: #f1f1f1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.img-cerveja {
+  background-color: transparent;
+  width: 15vw;
+}
+
+.img-cerveja-big {
+  background-color: transparent;
+  width: 8.2vw;
+}
+
+.box {
+  background-color: white;
+  border-radius: 20px;
+  height: 28vw;
+  margin: 1.5vw;
+  padding-top: 1vh;
+  text-align: center;
+  width: 20vw;
+}

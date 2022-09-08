@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { func } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import listProducts from '../API_Calls/listProducts';
+import '../Styles/Products.css';
 
 function TableProducts(props) {
   const [arrProducts, setArrProducts] = useState([]);
@@ -92,14 +93,25 @@ function TableProducts(props) {
   };
 
   return (
-    <div>
+    <div className="products-all">
       {arrProducts.map((items) => (
-        <div key={ items.id }>
-          <img
-            src={ items.urlImage }
-            alt="imagem de cerveja"
-            data-testid={ `customer_products__img-card-bg-image-${items.id}` }
-          />
+        <div key={ items.id } className="box">
+          {items.id === 1
+            ? (
+              <img
+                src={ items.urlImage }
+                alt="imagem de cerveja"
+                data-testid={ `customer_products__img-card-bg-image-${items.id}` }
+                className="img-cerveja-big"
+              />)
+            : (
+              <img
+                src={ items.urlImage }
+                alt="imagem de cerveja"
+                data-testid={ `customer_products__img-card-bg-image-${items.id}` }
+                className="img-cerveja"
+              />)}
+
           <p
             data-testid={ `customer_products__element-card-title-${items.id}` }
           >
@@ -108,6 +120,8 @@ function TableProducts(props) {
           <p
             data-testid={ `customer_products__element-card-price-${items.id}` }
           >
+            R$
+            {' '}
             {items.price.replace(/\./, ',')}
           </p>
           <button
