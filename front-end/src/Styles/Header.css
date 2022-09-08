@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Fugaz+One&family=Rampart+One&display=swap') ;
+
+.header-geral {
+  align-items: center;
+  background-color: rgb(255, 174, 0);
+  display: flex;
+  justify-content: space-between;
+}
+
+.space-names {
+  margin: 0%;
+  padding: 0.85vw;
+}
+
+.background-title {
+  background-color: #011b27;
+  font-size: 3vh;
+  padding: 0.25vw;
+  padding-left: 0.3vw;
+  padding-right: 5.5vw;
+}
+
+.title {
+  background-clip: text;
+  background-color: brown;
+  background-image: linear-gradient(90deg, rgba(251, 251, 251, 1) 49%, rgb(255, 174, 0) 13%);
+  font-family: Anton , sans-serif;
+  -webkit-text-fill-color: transparent;
+}
+
+.products-name {
+  background-color: #f60;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: 800;
+  padding: 1.65vw;
+  padding-left: 0.2vw;
+  text-decoration: none;
+}
+
+.material-icons {
+  color: rgba(251, 251, 251, 1);
+  font-size: 4.5vh;
+  padding: 1.25vw;
+  padding-right: 0.2vw;
+}
+
+.products-icon {
+  background-color: #f60;
+}
+
+.orders-name {
+  color: white;
+  font-size: 2.5vh;
+  font-weight: 800;
+  padding: 1.65vw;
+  padding-left: 0.2vw;
+  text-decoration: none;
+}
+
+.client-name {
+  color: white;
+  font-size: 2.5vh;
+  font-weight: 800;
+  padding: 1.65vw;
+  padding-left: 0.2vw;
+  text-decoration: underline;
+}
+
+.button-background {
+  background-color: rgb(255, 174, 0);
+  border: 0;
+  border-color: transparent;
+  font-family: system-ui , sans-serif;
+  padding: 0;
+  padding-left: 1.5vw;
+  padding-right: 1vw;
+}
