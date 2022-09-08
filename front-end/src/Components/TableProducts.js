@@ -124,30 +124,36 @@ function TableProducts(props) {
             {' '}
             {items.price.replace(/\./, ',')}
           </p>
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-rm-item-${items.id}` }
-            onClick={ () => rmValue(items.id) }
-            id={ items.id }
-          >
-            -
-          </button>
-          <input
-            type="number"
-            min="0"
-            value={ items.qtd }
-            data-testid={ `customer_products__input-card-quantity-${items.id}` }
-            onChange={ changeInput }
-            id={ items.id }
-          />
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-add-item-${items.id}` }
-            onClick={ () => addValue(items.id) }
-            id={ items.id }
-          >
-            +
-          </button>
+          <div className="box-buttons">
+            <button
+              type="button"
+              data-testid={ `customer_products__button-card-rm-item-${items.id}` }
+              onClick={ () => rmValue(items.id) }
+              id={ items.id }
+              className="button-quantity"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              min="0"
+              value={ items.qtd }
+              data-testid={ `customer_products__input-card-quantity-${items.id}` }
+              onChange={ changeInput }
+              id={ items.id }
+              className="input-quantity"
+            />
+            <button
+              type="button"
+              data-testid={ `customer_products__button-card-add-item-${items.id}` }
+              onClick={ () => addValue(items.id) }
+              id={ items.id }
+              className="button-quantity"
+            >
+              +
+            </button>
+          </div>
+
         </div>
       ))}
       <button
@@ -155,6 +161,7 @@ function TableProducts(props) {
         data-testid="customer_products__button-cart"
         onClick={ clickCart }
         disabled={ totalPrice === 0 || totalPrice === '0.00' }
+        className="button-price"
       >
         <p data-testid="customer_products__checkout-bottom-value">
           {`Valor total: R$${totalPrice.toString().replace(/\./, ',')}`}
