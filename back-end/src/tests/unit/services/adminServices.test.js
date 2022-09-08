@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 
-const users = require('../../mocks/usersMock')
+const {users} = require('../../mocks/usersMock')
 const adminService = require('../../../api/services/admin.service');
 const noAdminUsers = users.filter((user) => user.role !== 'administrator');
 
@@ -74,5 +74,4 @@ describe('Admin Service', function () {
       });
     });
   });
-
 });
