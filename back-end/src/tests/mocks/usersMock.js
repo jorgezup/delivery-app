@@ -36,4 +36,19 @@ const users = [
   }
 ];
 
-module.exports = users;
+const newUser =   {
+  "name": "Joao Lucas",
+  "email": "joaolucas@deliveryapp.com",
+  "password": "3c28d2b0881bf46457a853e0b07531c6",
+  "role": "seller"
+}
+
+const newUserWithId =   {
+  "id": 6,
+  "name": "Joao Lucas",
+  "email": "joaolucas@deliveryapp.com",
+  "password": "3c28d2b0881bf46457a853e0b07531c6",
+  "role": "seller"
+}
+
+module.exports = {users, newUser, newUserWithId};
