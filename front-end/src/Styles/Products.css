@@ -1,0 +1,73 @@
+.products-all {
+  background-color: #f1f1f1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.img-cerveja {
+  background-color: transparent;
+  width: 15vw;
+}
+
+.img-cerveja-big {
+  background-color: transparent;
+  width: 8.2vw;
+}
+
+.box {
+  background-color: white;
+  border-radius: 20px;
+  height: 28vw;
+  margin: 1.5vw;
+  padding-top: 1vh;
+  text-align: center;
+  width: 20vw;
+}
+
+.box-buttons {
+  align-items: center;
+  background-color: #ddd5d5;
+  border-radius: 20px;
+  display: flex;
+  height: 5vw;
+  justify-content: center;
+  padding: 0.5vw;
+}
+
+.button-quantity {
+  background-color: rgb(255, 174, 0);
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 2.3vw;
+  width: 2.5vw;
+}
+
+.input-quantity {
+  border: 0;
+  border-radius: 5px;
+  height: 1.8vw;
+  margin: 0.2vw;
+  padding-left: 1.2vw;
+  text-align: center;
+  width: 3.5vw;
+}
+
+.button-price {
+  background-color: #f60;
+  border: 0;
+  border-radius: 70px;
+  bottom: 1vh;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5vw;
+  font-weight: 800;
+  padding: 0.5vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  position: fixed;
+  right: 0.5vw;
+}

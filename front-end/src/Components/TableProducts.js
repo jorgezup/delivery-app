@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { func } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import listProducts from '../API_Calls/listProducts';
+import '../Styles/Products.css';
 
 function TableProducts(props) {
   const [arrProducts, setArrProducts] = useState([]);
@@ -92,14 +93,25 @@ function TableProducts(props) {
   };
 
   return (
-    <div>
+    <div className="products-all">
       {arrProducts.map((items) => (
-        <div key={ items.id }>
-          <img
-            src={ items.urlImage }
-            alt="imagem de cerveja"
-            data-testid={ `customer_products__img-card-bg-image-${items.id}` }
-          />
+        <div key={ items.id } className="box">
+          {items.id === 1
+            ? (
+              <img
+                src={ items.urlImage }
+                alt="imagem de cerveja"
+                data-testid={ `customer_products__img-card-bg-image-${items.id}` }
+                className="img-cerveja-big"
+              />)
+            : (
+              <img
+                src={ items.urlImage }
+                alt="imagem de cerveja"
+                data-testid={ `customer_products__img-card-bg-image-${items.id}` }
+                className="img-cerveja"
+              />)}
+
           <p
             data-testid={ `customer_products__element-card-title-${items.id}` }
           >
@@ -108,32 +120,40 @@ function TableProducts(props) {
           <p
             data-testid={ `customer_products__element-card-price-${items.id}` }
           >
+            R$
+            {' '}
             {items.price.replace(/\./, ',')}
           </p>
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-rm-item-${items.id}` }
-            onClick={ () => rmValue(items.id) }
-            id={ items.id }
-          >
-            -
-          </button>
-          <input
-            type="number"
-            min="0"
-            value={ items.qtd }
-            data-testid={ `customer_products__input-card-quantity-${items.id}` }
-            onChange={ changeInput }
-            id={ items.id }
-          />
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-add-item-${items.id}` }
-            onClick={ () => addValue(items.id) }
-            id={ items.id }
-          >
-            +
-          </button>
+          <div className="box-buttons">
+            <button
+              type="button"
+              data-testid={ `customer_products__button-card-rm-item-${items.id}` }
+              onClick={ () => rmValue(items.id) }
+              id={ items.id }
+              className="button-quantity"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              min="0"
+              value={ items.qtd }
+              data-testid={ `customer_products__input-card-quantity-${items.id}` }
+              onChange={ changeInput }
+              id={ items.id }
+              className="input-quantity"
+            />
+            <button
+              type="button"
+              data-testid={ `customer_products__button-card-add-item-${items.id}` }
+              onClick={ () => addValue(items.id) }
+              id={ items.id }
+              className="button-quantity"
+            >
+              +
+            </button>
+          </div>
+
         </div>
       ))}
       <button
@@ -141,6 +161,7 @@ function TableProducts(props) {
         data-testid="customer_products__button-cart"
         onClick={ clickCart }
         disabled={ totalPrice === 0 || totalPrice === '0.00' }
+        className="button-price"
       >
         <p data-testid="customer_products__checkout-bottom-value">
           {`Valor total: R$${totalPrice.toString().replace(/\./, ',')}`}
