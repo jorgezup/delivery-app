@@ -77,3 +77,7 @@
   padding-left: 1.5vw;
   padding-right: 1vw;
 }
+
+.orders-name, .products-icon, .material-icons, .products-name {
+  cursor: pointer;
+}
