@@ -6,7 +6,6 @@ function Orders() {
   return (
     <div>
       <Header />
-      <h1>Meus pedidos</h1>
       <TableOrders />
     </div>
   );
