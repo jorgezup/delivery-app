@@ -69,7 +69,6 @@ function Login() {
     } else {
       setPassword(value);
       passwordError(value);
-      console.log('Email', validEmail, 'Senha', validPassword);
     }
   };
 
