@@ -15,8 +15,33 @@ function DetailsOrderSeller({
   return (
     <div className="container">
       {!sale && <h3>Carregando</h3>}
-      <h3>Detalhes do Pedido</h3>
-      <div className="row">
+      <div className="top-infos-general">
+        <div
+          data-testid={ `${dataTestId}element-order-details-label-delivery-status` }
+          className="top-infos-status"
+        >
+          {sale.status}
+        </div>
+        <Button
+          data-testid={ `${dataTestId}button-preparing-check` }
+          type="button"
+          value="Preparar Pedido"
+          disabled={ sale.status !== 'Pendente' }
+          onClick={ handleChangeStatusToPreparing }
+          className="top-infos-button-delivered"
+        />
+        <Button
+          data-testid={ `${dataTestId}button-dispatch-check` }
+          type="button"
+          value="Saiu para entrega"
+          disabled={ sale.status !== 'Preparando' }
+          onClick={ handleChangeStatusToDispatch }
+          className="top-infos-button-delivered"
+        />
+      </div>
+      <h3 className="title-table">Detalhes do Pedido</h3>
+      <TableItensOrder products={ products } />
+      <div className="row footer-infos-general-seller">
         <div
           data-testid={ `${dataTestId}element-order-details-label-order-id` }
         >
@@ -27,33 +52,13 @@ function DetailsOrderSeller({
         >
           {formatDate(sale.saleDate)}
         </div>
-        <div
-          data-testid={ `${dataTestId}element-order-details-label-delivery-status` }
-        >
-          {sale.status}
+        <div className="footer-infos-total-price">
+          <span
+            data-testid={ `${dataTestId}element-order-total-price` }
+          >
+            {`Valor Total: R$ ${formatPrice(sale.totalPrice)}`}
+          </span>
         </div>
-        <Button
-          data-testid={ `${dataTestId}button-preparing-check` }
-          type="button"
-          value="Preparar Pedido"
-          disabled={ sale.status !== 'Pendente' }
-          onClick={ handleChangeStatusToPreparing }
-        />
-        <Button
-          data-testid={ `${dataTestId}button-dispatch-check` }
-          type="button"
-          value="Saiu para entrega"
-          disabled={ sale.status !== 'Preparando' }
-          onClick={ handleChangeStatusToDispatch }
-        />
-      </div>
-      <TableItensOrder products={ products } />
-      <div className="subtotal">
-        <span
-          data-testid={ `${dataTestId}element-order-total-price` }
-        >
-          {`R$ ${formatPrice(sale.totalPrice)}`}
-        </span>
       </div>
     </div>
   );
