@@ -7,7 +7,7 @@
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  margin: 3vw;
+  margin: 1.5vw;
 }
 
 .top-infos-status {
@@ -47,7 +47,7 @@
   border-radius: 15px;
   border-spacing: 0 3px;
   margin-left: 5vw;
-  padding: 2.5vw;
+  padding: 2vw;
   text-align: center;
 }
 
