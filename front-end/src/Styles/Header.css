@@ -2,7 +2,7 @@
 
 .header-geral {
   align-items: center;
-  background-color: rgb(255, 174, 0);
+  background-color: #ffae00;
   display: flex;
   justify-content: space-between;
 }
@@ -39,7 +39,7 @@
 }
 
 .material-icons {
-  color: rgba(251, 251, 251, 1);
+  color: #fbfbfb;
   font-size: 4.5vh;
   padding: 1.25vw;
   padding-right: 0.2vw;
@@ -68,7 +68,7 @@
 }
 
 .button-background {
-  background-color: rgb(255, 174, 0);
+  background-color: #ffae00;
   border: 0;
   border-color: transparent;
   cursor: pointer;
