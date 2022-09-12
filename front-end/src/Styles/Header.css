@@ -2,7 +2,7 @@
 
 .header-geral {
   align-items: center;
-  background-color: rgb(255, 174, 0);
+  background-color: #ffae00;
   display: flex;
   justify-content: space-between;
 }
@@ -23,7 +23,7 @@
 .title {
   background-clip: text;
   background-color: brown;
-  background-image: linear-gradient(90deg, white 49%, rgb(255, 174, 0) 13%);
+  background-image: linear-gradient(90deg, #fbfbfb 49%, #ffae00 13%);
   font-family: Anton , sans-serif;
   -webkit-text-fill-color: transparent;
 }
@@ -39,7 +39,7 @@
 }
 
 .material-icons {
-  color: rgba(251, 251, 251, 1);
+  color: #fbfbfb;
   font-size: 4.5vh;
   padding: 1.25vw;
   padding-right: 0.2vw;
@@ -68,7 +68,7 @@
 }
 
 .button-background {
-  background-color: rgb(255, 174, 0);
+  background-color: #ffae00;
   border: 0;
   border-color: transparent;
   cursor: pointer;
@@ -76,4 +76,8 @@
   padding: 0;
   padding-left: 1.5vw;
   padding-right: 1vw;
+}
+
+.orders-name, .products-icon, .material-icons, .products-name {
+  cursor: pointer;
 }
