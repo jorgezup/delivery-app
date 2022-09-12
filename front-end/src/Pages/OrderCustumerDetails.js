@@ -5,6 +5,8 @@ import Header from '../Components/Header';
 import OrderDetailsTopInfos from '../Components/OrderDetailsTopInfos';
 // import api from '../API_Calls/api';
 import updateStatus from '../API_Calls/updateStatus';
+import '../Styles/OrderDetails.css';
+import OrderDetailsFooterInfos from '../Components/OrderDetailsFooterInfos';
 
 function OrderCustumerDetails() {
   const [order, setOrder] = useState({});
@@ -51,22 +53,22 @@ function OrderCustumerDetails() {
   };
 
   return (
-    <div>
+    <div className="general">
       <Header />
-      <h3>Detalhes do Pedido</h3>
       <OrderDetailsTopInfos
         order={ order }
         handleChangeStatusToDelivered={ handleChangeStatusToDelivered }
         buttonDisabled={ buttonDisabled }
       />
-      <table>
+      <h3 className="title-table">Detalhes do Pedido</h3>
+      <table className="table-products-general">
         <thead>
           <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
+            <th className="table-products-title">Item</th>
+            <th className="table-products-title">Descrição</th>
+            <th className="table-products-title">Quantidade</th>
+            <th className="table-products-title">Valor Unitário</th>
+            <th className="table-products-title">Sub-total</th>
           </tr>
         </thead>
         <tbody>
@@ -76,6 +78,7 @@ function OrderCustumerDetails() {
                 data-testid={
                   `${dataTestId}element-order-table-item-number-${index}`
                 }
+                className="table-products-itens"
               >
                 {index + 1}
               </td>
@@ -83,6 +86,7 @@ function OrderCustumerDetails() {
                 data-testid={
                   `${dataTestId}element-order-table-name-${index}`
                 }
+                className="table-products-description"
               >
                 {item.name}
               </td>
@@ -90,6 +94,7 @@ function OrderCustumerDetails() {
                 data-testid={
                   `${dataTestId}element-order-table-quantity-${index}`
                 }
+                className="table-products-quantity"
               >
                 {item.saleProduct.quantity}
 
@@ -98,6 +103,7 @@ function OrderCustumerDetails() {
                 data-testid={
                   `${dataTestId}element-order-table-unit-price-${index}`
                 }
+                className="table-products-unit-price"
               >
                 {item.price.replace(/\./, ',')}
 
@@ -106,7 +112,10 @@ function OrderCustumerDetails() {
                 data-testid={
                   `${dataTestId}element-order-table-sub-total-${index}`
                 }
+                className="table-products-sub-total"
               >
+                R$
+                {' '}
                 {
                   (+item.saleProduct.quantity * +item.price)
                     ?.toFixed(2).toString().replace(/\./, ',')
@@ -117,11 +126,7 @@ function OrderCustumerDetails() {
           ))}
         </tbody>
       </table>
-      <p
-        data-testid={ `${dataTestId}element-order-total-price` }
-      >
-        {`Valor total: R$${order.totalPrice?.toFixed(2).toString().replace(/\./, ',')}`}
-      </p>
+      <OrderDetailsFooterInfos order={ order } />
     </div>
   );
 }

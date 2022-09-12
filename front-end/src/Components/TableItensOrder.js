@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 
 function TableItensOrder({ products }) {
   return (
-    <table>
+    <table className="table-products-general">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
+          <th className="table-products-title">Item</th>
+          <th className="table-products-title">Descrição</th>
+          <th className="table-products-title">Quantidade</th>
+          <th className="table-products-title">Valor Unitário</th>
+          <th className="table-products-title">Sub-total</th>
         </tr>
       </thead>
       <tbody>
@@ -19,12 +19,14 @@ function TableItensOrder({ products }) {
               <td
                 data-testid={ `
                 seller_order_details__element-order-table-item-number-${index + 1}` }
+                className="table-products-itens"
               >
                 {index + 1}
               </td>
               <td
                 data-testid={ `
                 seller_order_details__element-order-table-name-${product.name}` }
+                className="table-products-description"
               >
                 {product.name}
               </td>
@@ -32,12 +34,14 @@ function TableItensOrder({ products }) {
                 data-testid={ `
                 seller_order_details__element-order-table-quantity-${
             product.saleProduct.quantity} ` }
+                className="table-products-quantity"
               >
                 {product.saleProduct.quantity}
               </td>
               <td
                 data-testid={ `
                 seller_order_details__element-order-table-unit-price-${product.price}` }
+                className="table-products-unit-price"
               >
                 {product.price.toString().replace(/\./, ',')}
               </td>
@@ -45,7 +49,10 @@ function TableItensOrder({ products }) {
                 data-testid={ `
                 seller_order_details__element-order-table-sub-total-${
             product.price * product.saleProduct.quantity}` }
+                className="table-products-sub-total"
               >
+                R$
+                {' '}
                 {
                   (product.price * product.saleProduct.quantity)
                     .toFixed(2).replace(/\./, ',')

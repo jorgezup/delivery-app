@@ -2,9 +2,13 @@ import { string } from 'prop-types';
 import React from 'react';
 
 function Button(props) {
-  const { type, value } = props;
+  const { type, value, className } = props;
   return (
-    <button { ...props } type={ type === 'button' ? 'button' : 'submit' }>
+    <button
+      { ...props }
+      type={ type === 'button' ? 'button' : 'submit' }
+      className={ className }
+    >
       {value}
     </button>
   );
@@ -13,6 +17,7 @@ function Button(props) {
 Button.propTypes = {
   type: string,
   value: string,
+  className: string,
 }.isRequired;
 
 export default Button;
