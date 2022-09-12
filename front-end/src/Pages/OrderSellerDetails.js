@@ -49,10 +49,9 @@ function OrderSellerDetails() {
     getSaleSale();
   }, [token, sale]);
   return (
-    <div>
+    <div className="general">
       {isLoading && <h1>Loading</h1>}
       {pInfo && <h1 style={ { color: 'red' } }>{pInfo}</h1>}
-      <h1>Detalhes Ordem Vendedor</h1>
       <Header />
       <DetailsOrderSeller
         sale={ sale }

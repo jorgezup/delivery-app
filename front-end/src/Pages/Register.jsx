@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import validate from '../Validations/validateRegister';
 import postRegister from '../API_Calls/register';
+import '../Styles/Register.css';
+import logo from '../images/logo.png';
 
 function Register() {
   const [name, setName] = useState('');
@@ -37,37 +39,64 @@ function Register() {
   return (
     <div className="register-page">
       <main className="register-main">
+        <div className="logo">
+          <img src={ logo } alt="Logo" />
+          <h1>
+            Beer
+            <span>Pong</span>
+          </h1>
+        </div>
         <form className="register-form">
-          <input
-            id="name"
-            type="text"
-            data-testid="common_register__input-name"
-            placeholder="Nome"
-            className="register-input"
-            required
-            value={ name }
-            onChange={ (e) => setName(e.target.value) }
-          />
-          <input
-            id="email"
-            type="text"
-            data-testid="common_register__input-email"
-            placeholder="Email"
-            className="register-input"
-            required
-            value={ email }
-            onChange={ (e) => setEmail(e.target.value) }
-          />
-          <input
-            id="password"
-            type="password"
-            data-testid="common_register__input-password"
-            placeholder="Senha"
-            className="register-input"
-            required
-            value={ password }
-            onChange={ (e) => setPassword(e.target.value) }
-          />
+          <label
+            htmlFor="name"
+            className="txt_field"
+          >
+            <span>Nome</span>
+            <input
+              id="name"
+              type="text"
+              data-testid="common_register__input-name"
+              placeholder="Nome"
+              className="register-input"
+              required
+              value={ name }
+              onChange={ (e) => setName(e.target.value) }
+            />
+          </label>
+          <label
+            htmlFor="email"
+            className="txt_field"
+          >
+            <span>Email</span>
+            <input
+              id="email"
+              type="text"
+              data-testid="common_register__input-email"
+              placeholder="Email"
+              className="register-input"
+              required
+              value={ email }
+              onChange={ (e) => setEmail(e.target.value) }
+            />
+          </label>
+
+          <label
+            htmlFor="password"
+            className="txt_field"
+          >
+            <span>Senha</span>
+            <input
+              id="password"
+              type="password"
+              data-testid="common_register__input-password"
+              placeholder="Senha"
+              className="register-input"
+              required
+              value={ password }
+              onChange={ (e) => setPassword(e.target.value) }
+            />
+          </label>
+
           <button
             type="button"
             data-testid="common_register__button-register"

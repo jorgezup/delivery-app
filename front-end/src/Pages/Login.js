@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import userLogin from '../API_Calls/userLogin';
 // import { MyContext } from '../Context/Provider';
+import '../Styles/Login.css';
+import logo from '../images/logo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -125,11 +127,23 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1> Aprovados App </h1>
-      <main>
+    <div className="center">
+      <div className="container-login">
+
+        <div className="logo">
+          <img src={ logo } alt="Logo" />
+          <h1>
+            Beer
+            <span>Pong</span>
+          </h1>
+        </div>
         <form>
-          <label htmlFor="email-input">
+
+          <label
+            htmlFor="email-input"
+            className="txt_field"
+          >
+            <span>Email</span>
             <input
               type="email"
               id="email-input"
@@ -138,8 +152,14 @@ function Login() {
               value={ email }
               onChange={ manageInputs }
             />
+
           </label>
-          <label htmlFor="password-input">
+
+          <label
+            htmlFor="password-input"
+            className="txt_field"
+          >
+            <span>Senha</span>
             <input
               type="password"
               id="password-input"
@@ -149,10 +169,11 @@ function Login() {
               onChange={ manageInputs }
             />
           </label>
-          {}
+
           <button
             type="button"
             data-testid="common_login__button-login"
+            className="btn_login"
             disabled={ disable }
             onClick={ clickLogin }
           >
@@ -161,16 +182,17 @@ function Login() {
           <button
             type="button"
             data-testid="common_login__button-register"
+            className="btn_register"
             onClick={ () => history.push('/register') }
           >
-            Ainda não é cadastrado?
+            Registre-se
           </button>
         </form>
         {validEmail
         && <p data-testid="common_login__element-invalid-email">{errorMessage}</p> }
         {validPassword
         && <p data-testid="common_login__element-invalid-email">{errorMessage}</p> }
-      </main>
+      </div>
     </div>
   );
 }
