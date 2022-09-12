@@ -6,6 +6,14 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
+##Personal GH
+.trybe
+__tests__
+trybe.yml
+.github
+jest-puppeteer.config.js
+jest.config.js
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
